@@ -1,4 +1,3 @@
-requests
 flask-cors
 flask
 pymongo[srv]

@@ -1,0 +1,13 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: marches-publics-backend
+  client:
+    build:
+      context: .
+      dockerfile: ui/Dockerfile
+    image: marches-publics-frontend
+    ports:
+      - "5001:80"
