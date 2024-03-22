@@ -9,6 +9,11 @@ app = Flask(__name__)
 CORS(app)
 
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({'ping': client.ping()})
+
+
 @app.route('/search', methods=['POST'])
 def search():
     raw_query = request.json.get('query')
