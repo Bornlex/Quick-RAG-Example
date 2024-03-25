@@ -9,6 +9,12 @@ app = Flask(__name__)
 CORS(app)
 
 
+@app.before_request
+def log_request_info():
+    app.logger.debug('Headers: %s', request.headers)
+    app.logger.debug('Body: %s', request.get_data())
+
+
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({'ping': client.ping()})
