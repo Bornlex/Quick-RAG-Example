@@ -33,7 +33,8 @@ class ClientWrapper:
         try:
             self._client.admin.command('ping')
             return True
-        except:
+        except Exception as e:
+            print(e)
             return False
 
 
