@@ -24,7 +24,7 @@ jobs:
           script: |
             cd /var/www/marches-publics
             sudo git pull
-            sudo envsubst < .env > .env.prod
+            sudo envsubst < .env.prod > .env
             sudo docker build -f Dockerfile -t marches-publics-backend .
             cd ui && sudo docker build -f Dockerfile -t marches-publics-frontend .
             cd /var/www/marches-publics
