@@ -17,7 +17,8 @@ def log_request_info():
 
 @app.route('/ping', methods=['GET'])
 def ping():
-    return jsonify({'ping': client.ping()})
+    result, message = client.ping()
+    return jsonify({'ping': result, 'message': message})
 
 
 @app.route('/search', methods=['POST'])

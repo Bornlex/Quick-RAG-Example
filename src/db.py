@@ -1,4 +1,5 @@
 import os
+from typing import Tuple
 from dotenv import load_dotenv
 from pymongo.server_api import ServerApi
 from pymongo.mongo_client import MongoClient
@@ -29,13 +30,12 @@ class ClientWrapper:
             results.append(r)
         return results
 
-    def ping(self):
+    def ping(self) -> Tuple[bool, str]:
         try:
             self._client.admin.command('ping')
-            return True
+            return True, ""
         except Exception as e:
-            print(e)
-            return False
+            return False, f"{type(e).__name__}: {str(e)}"
 
 
 if __name__ == '__main__':
