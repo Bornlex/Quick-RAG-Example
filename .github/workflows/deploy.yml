@@ -27,4 +27,5 @@ jobs:
             sudo envsubst < .env > .env.prod
             sudo docker build -f Dockerfile -t marches-publics-backend .
             cd ui && sudo docker build -f Dockerfile -t marches-publics-frontend .
+            sudo docker-compose down
             sudo docker-compose up --detach
