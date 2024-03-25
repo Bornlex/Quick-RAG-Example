@@ -17,12 +17,12 @@ function App() {
 
     return (
         <div className="container">
-            <h1 className="mainHeading">Find your next bid.</h1>
+            <h1 className="mainHeading">Trouvez votre prochain contrat.</h1>
             <form id="searchbar" className="searchBox" onSubmit={handleSubmit}>
                 <input
                   className="searchInput"
                   type="text"
-                  placeholder="Search anything"
+                  placeholder="Recherche..."
                   value={searchTerm.value}
                   onChange={event => setSearchTerm(event.target.value)}
                 />
