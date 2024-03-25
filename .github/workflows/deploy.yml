@@ -24,7 +24,7 @@ jobs:
           script: |
             cd /var/www/marches-publics
             git pull origin main
-            envsubst < .env > .env.prod
-            docker build -f Dockerfile -t marches-publics-backend .
-            cd ui && docker build -f Dockerfile -t marches-publics-frontend .
-            docker-compose up --detach
+            sudo envsubst < .env > .env.prod
+            sudo docker build -f Dockerfile -t marches-publics-backend .
+            cd ui && sudo docker build -f Dockerfile -t marches-publics-frontend .
+            sudo docker-compose up --detach
