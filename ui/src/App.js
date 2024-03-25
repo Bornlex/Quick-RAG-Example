@@ -6,10 +6,9 @@ function App() {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSubmit = async (event) => {
-        console.log('Search term:', searchTerm);
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/search', { "query": searchTerm });
+            const response = await axios.post('/api/search', { "query": searchTerm });
             console.log(response.data);
         } catch (error) {
             console.error('Erreur lors de la requête:', error);

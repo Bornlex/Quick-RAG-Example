@@ -2,10 +2,6 @@
 
 ## Start services
 
-```bash
-docker-compose up
-```
-
 ## Backend
 
 To build the container:
@@ -13,7 +9,7 @@ To build the container:
 docker build -f Dockerfile -t marches-publics-backend .
 ```
 
-To start the container:
+To start the container standalone:
 
 ```bash
 docker run --rm -p 5001:5001 marches-publics-backend
@@ -26,10 +22,17 @@ To build the container (from the ui folder):
 docker build -f Dockerfile -t marches-publics-frontend .
 ```
 
-To start the container:
+To start the container standalone:
 
 ```bash
 docker run --rm -p 3000:3000 marches-publics-frontend
+```
+
+## Full service
+
+To start both containers:
+```bash
+sudo docker-compose up --detach
 ```
 
 ## Resources

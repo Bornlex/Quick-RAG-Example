@@ -7,5 +7,5 @@ COPY src/* ./src/
 RUN pip install -r ./requirements.txt
 ENV FLASK_ENV production
 
-EXPOSE 5000
+EXPOSE 5001
 CMD ["gunicorn", "-b", ":5001", "main:app"]

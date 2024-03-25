@@ -1,33 +1,33 @@
-name: Deploy React and Flask App
+name: Deployment
 
 on:
-  push:
-    branches:
-      - main # Ou la branche que vous utilisez pour le déploiement
+  release:
+    types: [published]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      # Connexion au serveur via SSH et déploiement
+      - name: Inject environment
+        run: |
+          envsubst < .env.prod > .env
+        shell: bash
+        env:
+          MONGO_USER: ${{ secrets.MONGO_USER }}
+          MONGO_PASS: ${{ secrets.MONGO_PASS }}
+          MONGO_HOST: ${{ secrets.MONGO_HOST }}
+          MONGO_NAME: ${{ secrets.MONGO_NAME }}
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          host: ${{ env.SERVER_HOST }}
+          username: ${{ env.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }} # Supprimez cette ligne si vous utilisez le port 22
+          port: 22
           script: |
-            cd /chemin/vers/votre/application
+            cd /var/www/marches-publics
             git pull origin main
-            # Backend : Installation des dépendances et démarrage
-            cd backend
-            pip install -r requirements.txt
-            flask run --host=0.0.0.0 & # Adaptez selon votre configuration de déploiement
-            # Frontend : Construction et déploiement
-            cd ../frontend
-            npm install
-            npm run build
-            # Utilisez la commande appropriée pour redémarrer votre serveur web ou votre processus de backend ici, si nécessaire
+            docker build -f Dockerfile -t marches-publics-backend .
+            cd ui && docker build -f Dockerfile -t marches-publics-frontend .
+            docker-compose up --detach

@@ -4,10 +4,19 @@ services:
       context: .
       dockerfile: Dockerfile
     image: marches-publics-backend
+    ports:
+      - "5001:5001"
+    networks:
+      - gov
   client:
     build:
       context: .
       dockerfile: ui/Dockerfile
     image: marches-publics-frontend
     ports:
-      - "3000:80"
+      - "80:80"
+    networks:
+      - gov
+
+networks:
+  gov:
