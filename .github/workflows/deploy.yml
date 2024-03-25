@@ -23,7 +23,7 @@ jobs:
           port: 22
           script: |
             cd /var/www/marches-publics
-            git pull
+            sudo git pull
             sudo envsubst < .env > .env.prod
             sudo docker build -f Dockerfile -t marches-publics-backend .
             cd ui && sudo docker build -f Dockerfile -t marches-publics-frontend .
