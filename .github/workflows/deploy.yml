@@ -4,20 +4,16 @@ on:
   release:
     types: [published]
 
+env:
+  MONGO_USER: ${{ secrets.MONGO_USER }}
+  MONGO_PASS: ${{ secrets.MONGO_PASS }}
+  MONGO_HOST: ${{ secrets.MONGO_HOST }}
+  MONGO_NAME: ${{ secrets.MONGO_NAME }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Inject environment
-        run: |
-          envsubst < .env.prod > .env
-        shell: bash
-        env:
-          MONGO_USER: ${{ secrets.MONGO_USER }}
-          MONGO_PASS: ${{ secrets.MONGO_PASS }}
-          MONGO_HOST: ${{ secrets.MONGO_HOST }}
-          MONGO_NAME: ${{ secrets.MONGO_NAME }}
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
@@ -28,6 +24,7 @@ jobs:
           script: |
             cd /var/www/marches-publics
             git pull origin main
+            envsubst < .env > .env.prod
             docker build -f Dockerfile -t marches-publics-backend .
             cd ui && docker build -f Dockerfile -t marches-publics-frontend .
             docker-compose up --detach
