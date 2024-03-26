@@ -14,6 +14,7 @@ class ClientWrapper:
         self._mongo_pass = os.getenv('MONGO_PASS')
         self._mongo_host = os.getenv('MONGO_HOST')
         self._mongo_name = os.getenv('MONGO_NAME')
+        self._limit = os.getenv('MONGO_LIMIT')
         self._mongo_uri = f'mongodb+srv://{self._mongo_user}:{self._mongo_pass}@{self._mongo_host}?retryWrites=true&w=majority&appName={self._mongo_name}'
 
     def _get_client(self):
@@ -26,7 +27,7 @@ class ClientWrapper:
             'objet': {
                 '$regex': processed
             }
-        })
+        }).limit(30)
         results = []
         for r in raw_results:
             del r['_id']

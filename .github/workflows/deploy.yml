@@ -20,6 +20,7 @@ jobs:
             export MONGO_HOST=${{ vars.MONGO_HOST }}
             export MONGO_NAME=${{ vars.MONGO_NAME }}
             export MONGO_PASS=${{ secrets.MONGO_PASS }}
+            export MONGO_LIMIT=${{ vars.MONGO_LIMIT }}
             cd /var/www/marches-publics
             sudo git pull
             envsubst < .env.prod > .env

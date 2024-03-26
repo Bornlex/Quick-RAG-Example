@@ -58,3 +58,27 @@
 .tag:hover {
     background-color: #ddd;
 }
+
+/* Container for all search results */
+.searchResults {
+    margin-top: 20px;
+}
+
+/* Style for each result item */
+.resultItem {
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.resultItem h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.resultItem p {
+    margin: 5px 0 0;
+    color: #666;
+}
