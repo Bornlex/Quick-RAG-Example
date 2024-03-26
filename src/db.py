@@ -15,11 +15,14 @@ class ClientWrapper:
         self._mongo_host = os.getenv('MONGO_HOST')
         self._mongo_name = os.getenv('MONGO_NAME')
         self._mongo_uri = f'mongodb+srv://{self._mongo_user}:{self._mongo_pass}@{self._mongo_host}?retryWrites=true&w=majority&appName={self._mongo_name}'
-        self._client = MongoClient(self._mongo_uri, server_api=ServerApi('1'))
+
+    def _get_client(self):
+        return MongoClient(self._mongo_uri, server_api=ServerApi('1'))
 
     def search(self, query: str) -> list:
         processed = f'.*{query}.*'
-        raw_results = self._client[self._mongo_database][self._consultations_collection].find({
+        client = self._get_client()
+        raw_results = client[self._mongo_database][self._consultations_collection].find({
             'objet': {
                 '$regex': processed
             }
@@ -28,14 +31,19 @@ class ClientWrapper:
         for r in raw_results:
             del r['_id']
             results.append(r)
+
+        client.close()
         return results
 
     def ping(self) -> Tuple[bool, str]:
+        client = self._get_client()
         try:
-            self._client.admin.command('ping')
+            client.admin.command('ping')
             return True, ""
         except Exception as e:
             return False, f"{type(e).__name__}: {str(e)}"
+        finally:
+            client.close()
 
 
 if __name__ == '__main__':
