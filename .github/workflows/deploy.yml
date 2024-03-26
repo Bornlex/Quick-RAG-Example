@@ -4,18 +4,17 @@ on:
   release:
     types: [published]
 
-env:
-  MONGO_USER: ${{ secrets.MONGO_USER }}
-  MONGO_PASS: ${{ secrets.MONGO_PASS }}
-  MONGO_HOST: ${{ secrets.MONGO_HOST }}
-  MONGO_NAME: ${{ secrets.MONGO_NAME }}
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
+        env:
+          MONGO_USER: ${{ secrets.MONGO_USER }}
+          MONGO_PASS: ${{ secrets.MONGO_PASS }}
+          MONGO_HOST: ${{ secrets.MONGO_HOST }}
+          MONGO_NAME: ${{ secrets.MONGO_NAME }}
         with:
           host: ${{ vars.SERVER_HOST }}
           username: ${{ vars.SERVER_USERNAME }}
@@ -23,7 +22,6 @@ jobs:
           port: 22
           script: |
             cd /var/www/marches-publics
-            echo $MONGO_USER
             sudo git pull
             sudo envsubst < .env.prod > .env
             sudo docker build -f Dockerfile -t marches-publics-backend .
