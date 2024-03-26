@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            echo "env: ${{ secrets.MONGO_USER }}"
+            echo "env: ${{ vars.MONGO_USER }}, ${{ secrets.MONGO_PASS }}, ${{ env.MONGO_USER }}"
             cd /var/www/marches-publics
             sudo git pull
             sudo envsubst < .env.prod > .env
