@@ -23,6 +23,7 @@ jobs:
           port: 22
           script: |
             cd /var/www/marches-publics
+            echo $MONGO_USER
             sudo git pull
             sudo envsubst < .env.prod > .env
             sudo docker build -f Dockerfile -t marches-publics-backend .
