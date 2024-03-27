@@ -3,3 +3,4 @@ flask
 pymongo[srv]
 python-dotenv
 gunicorn
+groq

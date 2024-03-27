@@ -38,7 +38,7 @@ function App() {
                 />
                 <button type="submit" form="searchbar" className="searchButton">→</button>
             </form>
-            <h2 className="subHeading">Discover contracts for...</h2>
+            <h2 className="subHeading">Trouvez des contrats pour...</h2>
             <div className="tags">
                 <span className="tag">construction projects in new york</span>
                 <span className="tag">janitorial services on the east coast</span>
