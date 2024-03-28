@@ -24,7 +24,11 @@ def ping():
 @app.route('/search', methods=['POST'])
 def search():
     raw_query = request.json.get('query', '')
-    search_method = request.json.get('method', 'text')
+    search_method = request.json.get('method', 'vector')
+
+    if raw_query == '':
+        search_method = utils.SearchParameters.text_method
+
     if search_method == utils.SearchParameters.vector_method:
         raw_query, exception = llm.LLM().get_embeddings(raw_query)
         if exception != '':
