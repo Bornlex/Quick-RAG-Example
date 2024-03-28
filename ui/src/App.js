@@ -40,11 +40,11 @@ function App() {
             </form>
             <h2 className="subHeading">Trouvez des contrats pour...</h2>
             <div className="tags">
-                <span className="tag">construction projects in new york</span>
-                <span className="tag">janitorial services on the east coast</span>
-                <span className="tag">software license renewal</span>
-                <span className="tag">historical building restoration</span>
-                <span className="tag">artificial intelligence</span>
+                <span className="tag">projets informatiques dans l'Aisne</span>
+                <span className="tag">entretien d'ascenseurs</span>
+                <span className="tag">logiciels à moins de 5000€</span>
+                <span className="tag">restauration historique</span>
+                <span className="tag">intelligence artificielle</span>
             </div>
 
             <div className="searchResults">

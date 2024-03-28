@@ -1,7 +1,7 @@
 from flask_cors import CORS
 from flask import Flask, jsonify, request
 
-from src import db
+from src import db, llm, utils
 
 
 client = db.ClientWrapper()
@@ -23,8 +23,14 @@ def ping():
 
 @app.route('/search', methods=['POST'])
 def search():
-    raw_query = request.json.get('query')
-    results = client.search(raw_query)
+    raw_query = request.json.get('query', '')
+    search_method = request.json.get('method', 'text')
+    if search_method == utils.SearchParameters.vector_method:
+        raw_query, exception = llm.LLM().get_embeddings(raw_query)
+        if exception != '':
+            return jsonify({'results': [], 'message': 'Failed to get embeddings.'})
+    results = client.search(raw_query, search_method)
+
     return jsonify({'results': results})
 
 
