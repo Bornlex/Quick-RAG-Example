@@ -79,25 +79,21 @@ function App() {
                         <div>No results found.</div>
                     ) : (
                         searchResults.map((result, index) => (
-                            <div key={index} className="resultItem">
-                                <h3>{result.objet}</h3>
-                                <p>Code CPV: {result.codeCPV}</p>
-                                <p>Date of Notification: {result.dateNotification}</p>
-                                <p>Duration (Months): {result.dureeMois}</p>
-                                <p>Price Form: {result.formePrix}</p>
-                                <p>Amount: €{result.montant}</p>
-                                <p>Nature: {result.nature}</p>
-                                <p>Procedure: {result.procedure}</p>
-                                <p>Execution Location: {result.lieuExecution.nom}</p>
-                                <p>Contractor: {result.titulaires.map(titulaire => titulaire.denominationSociale).join(', ')}</p>
+                            <div className="resultItem">
+                                <div className="natureIndicator">{result.nature}</div>
+                                <div className="contractDetails">
+                                    <h3 className="contractObject">{result.objet}</h3>
+                                    <p className="contractDuration">Duration: {result.dureeMois} months</p>
+                                </div>
+                                <div className="contractPrice">€{result.montant}</div>
                             </div>
                         ))
                     )}
                 </div>
                 </>
-                )}
-                </div>
-            );
-            }
+            )}
+        </div>
+    );
+}
 
-            export default App;
+export default App;

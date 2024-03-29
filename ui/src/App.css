@@ -64,21 +64,47 @@
     margin-top: 20px;
 }
 
-/* Style for each result item */
 .resultItem {
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.resultItem h3 {
-    margin-top: 0;
-    color: #333;
+.natureIndicator {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  background-color: #FF4081;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  font-weight: bold;
+  border-radius: 4px;
 }
 
-.resultItem p {
-    margin: 5px 0 0;
-    color: #666;
+.contractDetails {
+  flex-grow: 1;
+}
+
+.contractObject {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.contractDuration {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.contractPrice {
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 15px;
 }
