@@ -23,6 +23,9 @@ jobs:
             export MONGO_LIMIT=${{ vars.MONGO_LIMIT }}
             export TOKENIZER_MODEL=${{ vars.TOKENIZER_MODEL }}
             export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export LOGIN_USER=${{ vars.LOGIN_USER }}
+            export LOGIN_PASS=${{ secrets.LOGIN_PASS }}
             cd /var/www/marches-publics
             sudo git pull
             envsubst < .env.prod > .env
