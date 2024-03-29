@@ -2,12 +2,14 @@ import './App.css';
 import Login from './Login';
 import axios from 'axios';
 import React, {useState} from "react";
+import userEvent from "@testing-library/user-event";
 
 
 function App() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'))
+    const [searchStarted, setSearchStarted] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -72,7 +74,9 @@ function App() {
                 </div>
 
                 <div className="searchResults">
-                    {searchResults.length > 0 ? (
+                    {searchResults.length === 0 && searchStarted ? (
+                        <div>No results found.</div>
+                    ) : (
                         searchResults.map((result, index) => (
                             <div key={index} className="resultItem">
                                 <h3>{result.objet}</h3>
@@ -87,8 +91,6 @@ function App() {
                                 <p>Contractor: {result.titulaires.map(titulaire => titulaire.denominationSociale).join(', ')}</p>
                             </div>
                         ))
-                    ) : (
-                        <div>No results found.</div>
                     )}
                 </div>
                 </>
