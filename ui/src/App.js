@@ -16,7 +16,8 @@ function App() {
         try {
             const response = await axios.post(
                 '/api/search', {
-                    "query": searchTerm,
+                    "query": searchTerm
+                }, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     }
