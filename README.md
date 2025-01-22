@@ -1,5 +1,9 @@
 # README
 
+## Motivation
+
+This serves as an example of a RAG system that I wrote to familiarize myself with it. I coded this in a few hours.
+
 ## Start services
 
 ## Backend
